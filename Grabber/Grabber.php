@@ -1,8 +1,14 @@
 <?php
 
-namespace Nzo\GrabberBundle\Services;
+namespace Nzo\GrabberBundle\Grabber;
 use Goutte\Client;
 
+/**
+ * GrabberBundle.
+ *
+ * @author Ala Eddine Khefifi <alakhefifi@gmail.com>
+ * Website   www.alakhefifi.com
+ */
 class Grabber {
 
     private $url;

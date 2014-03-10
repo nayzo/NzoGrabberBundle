@@ -46,7 +46,7 @@ In the controller use the Grabber service and specify the options needed:
 ```php
      public function indexAction($url)
     {
-        // get all URLs with no Exceptions
+        // get all URLs with no Exception
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url);
 
         // OR .. get all URLs but with Exception of $notScannedUrlsTab array.

@@ -8,9 +8,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * GrabberBundle.
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ * @author Ala Eddine Khefifi <alakhefifi@gmail.com>
+ * Website   www.alakhefifi.com
  */
 class NzoGrabberExtension extends Extension
 {
