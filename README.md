@@ -11,7 +11,7 @@ Features include:
 - Prevent specified URLs from been Grabbed
 
 
-Installation
+Installation 
 ------------
 
 ### Through Composer:
