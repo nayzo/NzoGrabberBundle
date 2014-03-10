@@ -72,4 +72,4 @@ License
 
 This bundle is under the MIT license. See the complete license in the bundle:
 
-See [Resources/doc/LICENSE](https://github.com/NAYZO/NzoUrlEncryptorBundle/tree/master/Resources/doc/LICENSE)
+See [Resources/doc/LICENSE](https://github.com/NAYZO/NzoGrabberBundle/blob/master/Resources/doc/LICENSE)
