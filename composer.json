@@ -1,9 +1,9 @@
 {
-    "name": "nzo/url-encryptor-bundle",
+    "name": "nzo/grabber-bundle",
     "type": "symfony-bundle",
-    "description": "The NzoUrlEncryptorBundle is a Symfony2 Bundle used to Encrypt and Decrypt data and variables passed through url and to provide more security in term of access to your project. It prevent users from reading and modifying sensitive data sent through the url.",
-    "keywords": ["Link", "url", "encryption", "decryption", "encrypt", "decrypt", "id", "data", "variable", "security"],
-    "homepage": "https://github.com/NAYZO/NzoUrlEncryptorBundle",
+    "description": "The NzoGrabberBundle is a Symfony2 Bundle used to Grabbe all types of links and URLs from any website.",
+    "keywords": ["Link", "url", "Grabbe", "scanne", "search"],
+    "homepage": "https://github.com/NAYZO/NzoGrabberBundle",
     "license": "MIT",
     "authors": [
         {
@@ -14,14 +14,11 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": "~2.1"
+        "symfony/framework-bundle": "~2.1",
+        "fabpot/goutte": "1.0.*@dev"
     },
-    "require-dev": {
-        "twig/twig": "~1.5",
-        "symfony/yaml": "~2.1"
-    },    
     "autoload": {
-        "psr-0": { "Nzo\\UrlEncryptorBundle": "" }
+        "psr-0": { "Nzo\\GrabberBundle": "" }
     },
-    "target-dir": "Nzo/UrlEncryptorBundle"
+    "target-dir": "Nzo/GrabberBundle"
 }

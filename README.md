@@ -1,15 +1,14 @@
-NzoUrlEncryptorBundle
+NzoGrabberBundle
 =====================
 
-The **NzoUrlEncryptorBundle** is a Symfony2 Bundle used to Encrypt and Decrypt data and variables passed through url and to provide more security in term of access to your project.
-It prevent users from reading and modifying sensitive data sent through the url.
+The **NzoGrabberBundle** is a Symfony2 Bundle used to Grabbe all types of links and URLs from any website.
 
 Features include:
 
-- Url Data & parameters Encryption
-- Url Data & parameters Decryption
-- Access from Twig by ease
-- Flexible configuration
+- Url Grabber for HTTP/HTTPS
+- Url Grabber for HREF/SRC/IMG types
+- Exclude any type of file by extension
+- Prevent specified URLs from been Grabbed
 
 
 Installation
