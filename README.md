@@ -20,7 +20,7 @@ Add the following lines in your `composer.json` file:
 
 ``` js
 "require": {
-    "nzo/url-encryptor-bundle": "dev-master"
+    "nzo/grabber-bundle": "dev-master"
 }
 ```
 
@@ -33,64 +33,34 @@ public function registerBundles()
 {
     return array(
         // ...
-        new Nzo\UrlEncryptorBundle\NzoUrlEncryptorBundle(),
+        new Nzo\GrabberBundle\NzoGrabberBundle(),
     );
 }
-```
-
-### Configure your application's config.yml:
-
-The secret option in the configuration must contain a random key string of maximum 8 caracters and minimum of one caracter.
-
-``` yml
-# app/config/config.yml
-
-nzo_url_encryptor:
-    secret: YourSecretEncryptionKey 
 ```
 
 Usage
 -----
 
-In your twig template use the filter to encrypt the variable in the url:
-
-``` html
-
- <a href="{{path('my-path-in-the-routing', {'id': MyId | urlencrypt } )}}"> My link </a>
-
- # if it needed you can use the twig decryption filter:
-
- <a href="{{path('my-path-in-the-routing', {'id': MyId | urldecrypt } )}}"> My link </a>
-``` 
-In the routing.yml:
-
-``` yml
-# routing.yml
-
-my-path-in-the-routing:    
-    pattern: /my-url/{id}
-    defaults: {_controller: MyBundle:MyController:MyFunction}
-
-```
-
-In the controller use the decrypt service on the encrypted 'id' comming from the routing:
+In the controller use the Grabber service and specify the options needed:
 
 ```php
-     public function indexAction($id) 
+     public function indexAction($url)
     {
-        $MyId = $this->get('nzo_url_encryptor')->decrypt($id);
+        // get all URLs with no Exceptions
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url);
 
-        //....
+        // OR .. get all URLs but with Exception of $notScannedUrlsTab array.
 
-    }    
-```
+            $notScannedUrlsTab = ['http://www.exemple.com/about']
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
 
-If it needed you can use the encryption service to encrypt your data:
+        // OR .. get get all URLs but with Exception of $notScannedUrlsTab array and file Extension
 
-```php
-     public function indexAction() 
-    {   
-        $Encrypted = $this->get('nzo_url_encryptor')->encrypt($data);
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, array('png', 'pdf'));
+
+        // OR .. get get all URLs but with only Exception of file Extension
+
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, array('png', 'pdf'));
 
         //....
 
