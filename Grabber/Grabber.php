@@ -19,7 +19,7 @@ class Grabber {
 
     }
 
-    public function graburls($url, $notScannedUrlsTab=null, $extensionTab=null){
+    public function grabUrls($url, $notScannedUrlsTab=null, $extensionTab=null){
         $this->url = $url;
         $this->notScannedUrlsTab = $notScannedUrlsTab;
         $this->extensionTab      = $extensionTab;
@@ -91,5 +91,17 @@ class Grabber {
         return ( substr($lien, -1) === '#') ? substr($lien, 0, -1) : $lien;
     }
 
+
+    public function grabImg($url){
+        $client = new Client();
+        $crawler = $client->request('GET', $url);
+
+        foreach ($crawler->filter('img[src]')->links() as $domElement) {
+            $lien = $this->cleanUpUrl($domElement->getUri());
+            if( $this->testDomaine($lien) )
+                array_push($this->ScannedUrlsTab, $lien);
+        }
+        return $this->ScannedUrlsTab;
+    }
 
 } 
