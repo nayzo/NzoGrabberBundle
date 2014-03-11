@@ -1,7 +1,7 @@
 NzoGrabberBundle
 =====================
 
-The **NzoGrabberBundle** is a Symfony2 Bundle used to Grabbe all types of links and URLs from any website.
+The **NzoGrabberBundle** is a Symfony2 Bundle used to Grabbe all types of links, URLs and Tags for (img, js, css) from any website.
 
 Features include:
 
