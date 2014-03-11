@@ -62,6 +62,22 @@ In the controller use the Grabber service and specify the options needed:
 
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, array('png', 'pdf'));
 
+         // OR .. get get all Img Files from the specified URL
+
+            $img = $this->get('nzo_grabber.grabber')->grabImg($url);
+
+        // OR .. get get all Js Files from the specified URL
+
+            $js = $this->get('nzo_grabber.grabber')->grabJs($url);
+
+        // OR .. get get all Css Files from the specified URL
+
+            $css = $this->get('nzo_grabber.grabber')->grabCss($url);
+
+        // OR .. get get all Css and Img and Js Files from the specified URL
+
+            $extrat = $this->get('nzo_grabber.grabber')->grabExtrat($url);
+
         //....
 
     }    

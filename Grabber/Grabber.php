@@ -114,20 +114,30 @@ class Grabber {
 
 
     public function addHost($urlsTab){
-        $newTab = array();
+
         foreach($urlsTab as $val){
-            $newTab[] = $this->url . '/' . $val;
+            $this->ScannedUrlsTab[] = $this->url . '/' . $val;
         }
-        return $newTab;
+        return $this->ScannedUrlsTab;
     }
 
     public function addHostCss($urlsTab){
-        $newTab = array();
+
         foreach($urlsTab as $val){
             if( substr($val, -4) === '.css' )
-                $newTab[] = $this->url . '/' . $val;
+                $this->ScannedUrlsTab[] = $this->url . '/' . $val;
         }
-        return $newTab;
+        return $this->ScannedUrlsTab;
+    }
+
+    public function grabExtrat($url){
+        $client = new Client();
+        $crawler = $client->request('GET', $url);
+        $this->url = $url;
+        $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
+        $this->addHost($crawler->filter('img[src]')->extract(array('src')));
+        $this->addHost($crawler->filter('script[src]')->extract(array('src')));
+        return $this->ScannedUrlsTab;
     }
 
 } 
