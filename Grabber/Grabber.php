@@ -27,8 +27,8 @@ class Grabber {
 
         $i=0;
         while(count($this->ScannedUrlsTab) > $i){
-                $this->crawler($this->ScannedUrlsTab[$i]);
-                $i++;
+            $this->crawler($this->ScannedUrlsTab[$i]);
+            $i++;
         }
         return $this->ScannedUrlsTab;
     }
@@ -91,17 +91,43 @@ class Grabber {
         return ( substr($lien, -1) === '#') ? substr($lien, 0, -1) : $lien;
     }
 
-
     public function grabImg($url){
         $client = new Client();
         $crawler = $client->request('GET', $url);
+        $this->url = $url;
+        return $this->addHost($crawler->filter('img[src]')->extract(array('src')));
+    }
 
-        foreach ($crawler->filter('img[src]')->links() as $domElement) {
-            $lien = $this->cleanUpUrl($domElement->getUri());
-            if( $this->testDomaine($lien) )
-                array_push($this->ScannedUrlsTab, $lien);
+    public function grabJs($url){
+        $client = new Client();
+        $crawler = $client->request('GET', $url);
+        $this->url = $url;
+        return $this->addHost($crawler->filter('script[src]')->extract(array('src')));
+    }
+
+    public function grabCss($url){
+        $client = new Client();
+        $crawler = $client->request('GET', $url);
+        $this->url = $url;
+        return $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
+    }
+
+
+    public function addHost($urlsTab){
+        $newTab = array();
+        foreach($urlsTab as $val){
+            $newTab[] = $this->url . '/' . $val;
         }
-        return $this->ScannedUrlsTab;
+        return $newTab;
+    }
+
+    public function addHostCss($urlsTab){
+        $newTab = array();
+        foreach($urlsTab as $val){
+            if( substr($val, -4) === '.css' )
+                $newTab[] = $this->url . '/' . $val;
+        }
+        return $newTab;
     }
 
 } 
