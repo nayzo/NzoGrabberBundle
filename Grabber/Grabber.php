@@ -81,7 +81,7 @@ class Grabber {
         if(substr($lien, -1) === '/' || substr($lien, -1) === '#')
             $lien = substr($lien, 0, -1);
         foreach($this->extensionTab as $extension){
-            if(substr($lien, -(strlen($extension)+1)) === '.'.$extension)
+            if( strtolower( substr($lien, -(strlen($extension)+1)) ) === '.' . strtolower($extension) )
                 return false;
         }
         return true;
