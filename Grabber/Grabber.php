@@ -12,6 +12,7 @@ use Goutte\Client;
 class Grabber {
 
     private $url;
+    private $domainUrl;
     private $notScannedUrlsTab = array();
     private $ScannedUrlsTab = array();
     private $extensionTab = array();
@@ -24,6 +25,7 @@ class Grabber {
         $this->notScannedUrlsTab = $notScannedUrlsTab;
         $this->extensionTab      = $extensionTab;
         $this->ScannedUrlsTab[]  = $this->url;
+        $this->domainUrl = $this->getDomaine($this->url);
 
         $i=0;
         while(count($this->ScannedUrlsTab) > $i){
@@ -47,7 +49,7 @@ class Grabber {
     }
 
     private function testDomaine($lien){
-        return substr($lien, 0, strlen($this->url)) === $this->url;
+        return $this->getDomaine($lien) === $this->domainUrl;
     }
 
     private function testExistanceScanned($lien){
@@ -116,7 +118,13 @@ class Grabber {
     public function addHost($urlsTab){
 
         foreach($urlsTab as $val){
-            $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+            $sub = substr($val, 0, 4);
+            if( 'http://' ===  $sub || 'https://' ===  $sub ){
+                if($this->getDomaine($val) === $this->domainUrl)
+                    $this->ScannedUrlsTab[] = $val;
+            }
+            else
+                $this->ScannedUrlsTab[] = $this->url . '/' . $val;
         }
         return $this->ScannedUrlsTab;
     }
@@ -124,21 +132,32 @@ class Grabber {
     public function addHostCss($urlsTab){
 
         foreach($urlsTab as $val){
-            if( substr($val, -4) === '.css' )
-                $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+            if( substr($val, -4) === '.css' ){
+                $sub = substr($val, 0, 4);
+                if( 'http://' ===  $sub || 'https://' ===  $sub ){
+                    if($this->getDomaine($val) === $this->domainUrl)
+                        $this->ScannedUrlsTab[] = $val;
+                }
+                else
+                    $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+            }
         }
         return $this->ScannedUrlsTab;
     }
 
     public function grabExtrat($url){
+        $this->url = $this->cleanUpUrl($url);
         $client = new Client();
-        $crawler = $client->request('GET', $url);
-        $this->url = $url;
+        $crawler = $client->request('GET', $this->url);
+        $this->domainUrl = $this->getDomaine($this->url);
+
         $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
         $this->addHost($crawler->filter('img[src]')->extract(array('src')));
         $this->addHost($crawler->filter('script[src]')->extract(array('src')));
         return $this->ScannedUrlsTab;
     }
 
-
+    private function getDomaine($url){
+        return parse_url($url, PHP_URL_SCHEME).'://'. parse_url($url, PHP_URL_HOST);
+    }
 } 
