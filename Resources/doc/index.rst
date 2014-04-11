@@ -1,7 +1,7 @@
 NzoGrabberBundle
 =====================
 
-The **NzoGrabberBundle** is a Symfony2 Bundle used to Grabbe all types of links and URLs from any website.
+The **NzoGrabberBundle** is a Symfony2 Bundle used to Grabbe all types of links, URLs and Tags for (img, js, css) from any website.
 
 Features include:
 
@@ -11,7 +11,7 @@ Features include:
 - Prevent specified URLs from been Grabbed
 
 
-Installation
+Installation 
 ------------
 
 ### Through Composer:
@@ -54,13 +54,29 @@ In the controller use the Grabber service and specify the options needed:
             $notScannedUrlsTab = ['http://www.exemple.com/about']
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
 
-        // OR .. get get all URLs but with Exception of $notScannedUrlsTab array and file Extension
+        // OR .. get all URLs but with Exception of $notScannedUrlsTab array and file Extension
 
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, array('png', 'pdf'));
 
-        // OR .. get get all URLs but with only Exception of file Extension
+        // OR .. get all URLs but with only Exception of file Extension
 
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, array('png', 'pdf'));
+
+         // OR .. get all Img Files from the specified URL
+
+            $img = $this->get('nzo_grabber.grabber')->grabImg($url);
+
+        // OR .. get all Js Files from the specified URL
+
+            $js = $this->get('nzo_grabber.grabber')->grabJs($url);
+
+        // OR .. get all Css Files from the specified URL
+
+            $css = $this->get('nzo_grabber.grabber')->grabCss($url);
+
+        // OR .. get all Css and Img and Js Files from the specified URL
+
+            $extrat = $this->get('nzo_grabber.grabber')->grabExtrat($url);
 
         //....
 
