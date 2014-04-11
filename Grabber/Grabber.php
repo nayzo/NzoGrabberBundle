@@ -118,7 +118,7 @@ class Grabber {
     public function addHost($urlsTab){
 
         foreach($urlsTab as $val){
-            $sub = substr($val, 0, 4);
+            $sub = substr($val, 0, 7);
             if( 'http://' ===  $sub || 'https://' ===  $sub ){
                 if($this->getDomaine($val) === $this->domainUrl)
                     $this->ScannedUrlsTab[] = $val;
@@ -133,7 +133,7 @@ class Grabber {
 
         foreach($urlsTab as $val){
             if( substr($val, -4) === '.css' ){
-                $sub = substr($val, 0, 4);
+                $sub = substr($val, 0, 7);
                 if( 'http://' ===  $sub || 'https://' ===  $sub ){
                     if($this->getDomaine($val) === $this->domainUrl)
                         $this->ScannedUrlsTab[] = $val;
