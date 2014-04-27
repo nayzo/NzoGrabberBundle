@@ -2,7 +2,7 @@
     "name": "nzo/grabber-bundle",
     "type": "symfony-bundle",
     "description": "The NzoGrabberBundle is a Symfony2 Bundle used to Grabbe all types of links and URLs from any website.",
-    "keywords": ["Link", "url", "Grabbe", "scan", "search", "crawl"],
+    "keywords": ["Link", "url", "Grabbe", "Scrape", "scan", "search", "crawl"],
     "homepage": "https://github.com/NAYZO/NzoGrabberBundle",
     "license": "MIT",
     "authors": [
