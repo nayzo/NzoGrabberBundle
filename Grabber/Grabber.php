@@ -96,21 +96,21 @@ class Grabber {
     public function grabImg($url){
         $client = new Client();
         $crawler = $client->request('GET', $url);
-        $this->url = $url;
+        $this->url = $this->getDomaine($url);
         return $this->addHost($crawler->filter('img[src]')->extract(array('src')));
     }
 
     public function grabJs($url){
         $client = new Client();
         $crawler = $client->request('GET', $url);
-        $this->url = $url;
+        $this->url = $this->getDomaine($url);
         return $this->addHost($crawler->filter('script[src]')->extract(array('src')));
     }
 
     public function grabCss($url){
         $client = new Client();
         $crawler = $client->request('GET', $url);
-        $this->url = $url;
+        $this->url = $this->getDomaine($url);
         return $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
     }
 
@@ -119,12 +119,16 @@ class Grabber {
 
         foreach($urlsTab as $val){
             $sub = substr($val, 0, 7);
-            if( 'http://' ===  $sub || 'https://' ===  $sub ){
-                if($this->getDomaine($val) === $this->domainUrl)
+            if( 'http://' ===  $sub || 'https:/' ===  $sub ){
+                if($this->getDomaine($val) === $this->url)
                     $this->ScannedUrlsTab[] = $val;
             }
-            else
-                $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+            else{
+                if($val[0] === '/')
+                    $this->ScannedUrlsTab[] = $this->url .  $val;
+                else
+                    $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+            }
         }
         return $this->ScannedUrlsTab;
     }
@@ -134,12 +138,18 @@ class Grabber {
         foreach($urlsTab as $val){
             if( substr($val, -4) === '.css' ){
                 $sub = substr($val, 0, 7);
-                if( 'http://' ===  $sub || 'https://' ===  $sub ){
-                    if($this->getDomaine($val) === $this->domainUrl)
+                if( 'http://' ===  $sub || 'https:/' ===  $sub ){
+                    if($this->getDomaine($val) === $this->url)
                         $this->ScannedUrlsTab[] = $val;
+                    ladybug_dump($val);
                 }
-                else
-                    $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+                else{
+                    if($val[0] === '/')
+                        $this->ScannedUrlsTab[] = $this->url .  $val;
+                    else
+                        $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+                }
+
             }
         }
         return $this->ScannedUrlsTab;
@@ -149,7 +159,7 @@ class Grabber {
         $this->url = $this->cleanUpUrl($url);
         $client = new Client();
         $crawler = $client->request('GET', $this->url);
-        $this->domainUrl = $this->getDomaine($this->url);
+        $this->url = $this->getDomaine($this->url);
 
         $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
         $this->addHost($crawler->filter('img[src]')->extract(array('src')));
