@@ -37,7 +37,9 @@ class Grabber {
 
     private function crawler($newUrl){
         $client = new Client();
-        $crawler = $client->request('GET', $newUrl);
+        try{
+            $crawler = $client->request('GET', $newUrl);
+        } catch (\Exception $e) {return;}
 
         foreach ($crawler->filter('a[href]')->links() as $domElement) {
             $lien = $this->cleanUpUrl($domElement->getUri());
