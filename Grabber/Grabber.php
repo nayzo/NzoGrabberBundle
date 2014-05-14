@@ -55,11 +55,13 @@ class Grabber {
     }
 
     private function testExistanceScanned($lien){
+        $lien = str_replace('://www.', '://', $lien);
         $verif = true;
         $stringUrl = substr($lien, 0, -1);
         $verifChar = substr($lien, -1) === '/';
 
         foreach($this->ScannedUrlsTab as $val){
+            $val = str_replace('://www.', '://', $val);
             if($lien === $val || ($verifChar  && $stringUrl === $val) || (!$verifChar && $lien.'/' === $val) )
                 $verif = false;
         }
@@ -67,12 +69,14 @@ class Grabber {
     }
 
     private function testExistanceNotScanned($lien){
+        $lien = str_replace('://www.', '://', $lien);
         if(empty($this->notScannedUrlsTab))
             return true;
         $verif = true;
         $stringUrl = substr($lien, 0, -1);
         $verifChar = substr($lien, -1) === '/';
         foreach($this->notScannedUrlsTab as $val){
+            $val = str_replace('://www.', '://', $val);
             if($lien === $val || ($verifChar  && $stringUrl === $val) || (!$verifChar && $lien.'/' === $val) )
                 $verif = false;
         }
