@@ -203,7 +203,6 @@ class Grabber
                 if ('http://' === $sub || 'https:/' === $sub) {
                     if ($this->getDomaine($val) === $this->url)
                         $this->ScannedUrlsTab[] = $val;
-                    ladybug_dump($val);
                 } else {
                     if ($val[0] === '/')
                         $this->ScannedUrlsTab[] = $this->url . $val;
