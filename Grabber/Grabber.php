@@ -16,9 +16,9 @@ class Grabber
 
     private $url;
     private $domainUrl;
-    private $notScannedUrlsTab = array();
-    private $ScannedUrlsTab = array();
-    private $extensionTab = array();
+    private $notScannedUrlsTab;
+    private $ScannedUrlsTab;
+    private $extensionTab;
     private $client;
 
     public function __construct()
@@ -34,6 +34,8 @@ class Grabber
      */
     public function grabUrls($url, $notScannedUrlsTab = null, $extensionTab = null)
     {
+        $this->cleanUpArray();
+
         $this->url = $url;
         $this->notScannedUrlsTab = $notScannedUrlsTab;
         $this->extensionTab = $extensionTab;
@@ -45,6 +47,7 @@ class Grabber
             $this->crawler($this->ScannedUrlsTab[$i]);
             $i++;
         }
+
         return $this->ScannedUrlsTab;
     }
 
@@ -57,13 +60,14 @@ class Grabber
         try {
             $crawler = $this->client->request('GET', $newUrl);
         } catch (\Exception $e) {
-            return;
+            return false;
         }
 
         foreach ($crawler->filter('a[href]')->links() as $domElement) {
             $lien = $this->cleanUpUrl($domElement->getUri());
-            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien))
+            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien)){
                 $this->ScannedUrlsTab[] = $lien;
+            }
         }
         return true;
     }
@@ -85,8 +89,9 @@ class Grabber
 
         foreach ($this->ScannedUrlsTab as $val) {
             $val = str_replace('://www.', '://', $val);
-            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val))
+            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val)){
                 return false;
+            }
         }
         return true;
     }
@@ -98,14 +103,16 @@ class Grabber
     private function testExistanceNotScanned($lien)
     {
         $lien = str_replace('://www.', '://', $lien);
-        if (empty($this->notScannedUrlsTab))
+        if (empty($this->notScannedUrlsTab)){
             return true;
+        }
         $stringUrl = substr($lien, 0, -1);
         $verifChar = substr($lien, -1) === '/';
         foreach ($this->notScannedUrlsTab as $val) {
             $val = str_replace('://www.', '://', $val);
-            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val))
+            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val)){
                 return false;
+            }
         }
         return true;
     }
@@ -116,13 +123,17 @@ class Grabber
      */
     private function testExtension($lien)
     {
-        if (empty($this->extensionTab))
+        if (empty($this->extensionTab)){
             return true;
-        if (substr($lien, -1) === '/' || substr($lien, -1) === '#')
+        }
+        if (substr($lien, -1) === '/' || substr($lien, -1) === '#'){
             $lien = substr($lien, 0, -1);
+        }
+
         foreach ($this->extensionTab as $extension) {
-            if (strtolower(substr($lien, -(strlen($extension) + 1))) === '.' . strtolower($extension))
+            if (strtolower(substr($lien, -(strlen($extension) + 1))) === '.' . strtolower($extension)){
                 return false;
+            }
         }
         return true;
     }
@@ -142,6 +153,7 @@ class Grabber
      */
     public function grabImg($url)
     {
+        $this->cleanUpArray();
         $crawler = $this->client->request('GET', $url);
         $this->url = $this->getDomaine($url);
         return $this->addHost($crawler->filter('img[src]')->extract(array('src')));
@@ -153,6 +165,7 @@ class Grabber
      */
     public function grabJs($url)
     {
+        $this->cleanUpArray();
         $crawler = $this->client->request('GET', $url);
         $this->url = $this->getDomaine($url);
         return $this->addHost($crawler->filter('script[src]')->extract(array('src')));
@@ -164,6 +177,7 @@ class Grabber
      */
     public function grabCss($url)
     {
+        $this->cleanUpArray();
         $crawler = $this->client->request('GET', $url);
         $this->url = $this->getDomaine($url);
         return $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
@@ -220,6 +234,7 @@ class Grabber
      */
     public function grabExtrat($url)
     {
+        $this->cleanUpArray();
         $this->url = $this->cleanUpUrl($url);
         $crawler = $this->client->request('GET', $this->url);
         $this->url = $this->getDomaine($this->url);
@@ -233,9 +248,15 @@ class Grabber
      * @param $url
      * @return string
      */
-    private function getDomaine($url)
+    public function getDomaine($url)
     {
         $url = str_replace('://www.', '://', $url);
         return parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
+    }
+
+    public function cleanUpArray(){
+        $this->notScannedUrlsTab = array();
+        $this->ScannedUrlsTab = array();
+        $this->extensionTab = array();
     }
 } 
