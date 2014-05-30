@@ -55,12 +55,14 @@ In the controller use the Grabber service and specify the options needed:
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
 
         // OR .. get all URLs but with Exception of $notScannedUrlsTab array and file Extension
+            Also you can exclude any URL containing the $exclude value.
 
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, array('png', 'pdf'));
+            $exclude = 'someText';
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, $exclude, array('png', 'pdf'));
 
         // OR .. get all URLs but with only Exception of file Extension
 
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, array('png', 'pdf'));
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, null, array('png', 'pdf'));
 
          // OR .. get all Img Files from the specified URL
 
