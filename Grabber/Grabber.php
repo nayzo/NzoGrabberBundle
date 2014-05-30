@@ -266,6 +266,6 @@ class Grabber
         if (empty($this->exclude)){
             return true;
         }
-        return strpos($lien, $this->exclude) !== false;
+        return strpos($lien, $this->exclude) === false;
     }
 } 
