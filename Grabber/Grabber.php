@@ -20,6 +20,7 @@ class Grabber
     private $ScannedUrlsTab;
     private $extensionTab;
     private $client;
+    private $exclude;
 
     public function __construct()
     {
@@ -32,7 +33,7 @@ class Grabber
      * @param null $extensionTab
      * @return array
      */
-    public function grabUrls($url, $notScannedUrlsTab = null, $extensionTab = null)
+    public function grabUrls($url, $notScannedUrlsTab = null, $exclude = null, $extensionTab = null)
     {
         $this->cleanUpArray();
 
@@ -41,6 +42,7 @@ class Grabber
         $this->extensionTab = $extensionTab;
         $this->ScannedUrlsTab[] = $this->url;
         $this->domainUrl = $this->getDomaine($this->url);
+        $this->exclude = $exclude;
 
         $i = 0;
         while (count($this->ScannedUrlsTab) > $i) {
@@ -65,7 +67,7 @@ class Grabber
 
         foreach ($crawler->filter('a[href]')->links() as $domElement) {
             $lien = $this->cleanUpUrl($domElement->getUri());
-            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien)){
+            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien) && $this->notInExculde($lien) ){
                 $this->ScannedUrlsTab[] = $lien;
             }
         }
@@ -258,5 +260,12 @@ class Grabber
         $this->notScannedUrlsTab = array();
         $this->ScannedUrlsTab = array();
         $this->extensionTab = array();
+    }
+
+    public function notInExculde($lien){
+        if (empty($this->exclude)){
+            return true;
+        }
+        return strpos($lien, $this->exclude) !== false;
     }
 } 
