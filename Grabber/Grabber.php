@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * NzoGrabberExtension file.
+ *
+ * (c) Ala Eddine Khefifi <alakhefifi@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Nzo\GrabberBundle\Grabber;
 
 use Goutte\Client;
 
 /**
- * @author Ala Eddine Khefifi <alakhefifi@gmail.com>
- * Website   www.alakhefifi.com
- *
  * Class Grabber
  * @package Nzo\GrabberBundle\Grabber
  */
@@ -67,10 +73,11 @@ class Grabber
 
         foreach ($crawler->filter('a[href]')->links() as $domElement) {
             $lien = $this->cleanUpUrl($domElement->getUri());
-            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien) && $this->notInExculde($lien) ){
+            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien) && $this->notInExculde($lien)) {
                 $this->ScannedUrlsTab[] = $lien;
             }
         }
+
         return true;
     }
 
@@ -91,7 +98,7 @@ class Grabber
 
         foreach ($this->ScannedUrlsTab as $val) {
             $val = str_replace('://www.', '://', $val);
-            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val)){
+            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val)) {
                 return false;
             }
         }
@@ -105,14 +112,14 @@ class Grabber
     private function testExistanceNotScanned($lien)
     {
         $lien = str_replace('://www.', '://', $lien);
-        if (empty($this->notScannedUrlsTab)){
+        if (empty($this->notScannedUrlsTab)) {
             return true;
         }
         $stringUrl = substr($lien, 0, -1);
         $verifChar = substr($lien, -1) === '/';
         foreach ($this->notScannedUrlsTab as $val) {
             $val = str_replace('://www.', '://', $val);
-            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val)){
+            if ($lien === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $lien . '/' === $val)) {
                 return false;
             }
         }
@@ -125,15 +132,15 @@ class Grabber
      */
     private function testExtension($lien)
     {
-        if (empty($this->extensionTab)){
+        if (empty($this->extensionTab)) {
             return true;
         }
-        if (substr($lien, -1) === '/' || substr($lien, -1) === '#'){
+        if (substr($lien, -1) === '/' || substr($lien, -1) === '#') {
             $lien = substr($lien, 0, -1);
         }
 
         foreach ($this->extensionTab as $extension) {
-            if (strtolower(substr($lien, -(strlen($extension) + 1))) === '.' . strtolower($extension)){
+            if (strtolower(substr($lien, -(strlen($extension) + 1))) === '.' . strtolower($extension)) {
                 return false;
             }
         }
@@ -256,14 +263,16 @@ class Grabber
         return parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
     }
 
-    public function cleanUpArray(){
+    public function cleanUpArray()
+    {
         $this->notScannedUrlsTab = array();
         $this->ScannedUrlsTab = array();
         $this->extensionTab = array();
     }
 
-    public function notInExculde($lien){
-        if (empty($this->exclude)){
+    public function notInExculde($lien)
+    {
+        if (empty($this->exclude)) {
             return true;
         }
         return strpos($lien, $this->exclude) === false;
