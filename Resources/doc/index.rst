@@ -74,7 +74,7 @@ OR .. get all URLs that does not figure in the ``exclude array``:
     }
 ```
 
-OR .. you can exclude URLs that contains a specified text and also you can select by ``file extension``:
+OR .. you can exclude URLs that contains a specified ``text`` and also you can select by ``file extension``:
 
 ```php
      public function indexAction($url)
