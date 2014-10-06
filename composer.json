@@ -1,18 +1,17 @@
 {
     "name": "nzo/grabber-bundle",
     "type": "symfony-bundle",
-    "description": "The NzoGrabberBundle is a Symfony2 Bundle used to Grabbe all types of links and URLs from any website.",
+    "description": "The NzoGrabberBundle is a Symfony2 Bundle used to Crowle and to Grabbe all types of links, URLs and Tags for (img, js, css) from any website.",
     "keywords": ["DomCrawler", "Link", "url", "Grabbe", "scrape", "scan", "search", "crawl"],
-    "homepage": "https://github.com/NAYZO/NzoGrabberBundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Ala Eddine Khefifi",
-            "email": "alakhefifi@gmail.com",
-            "homepage": "http://www.alakhefifi.com"
+            "email": "alakhefifi@gmail.com"
         }
     ],
     "require": {
+        "php": ">=5.3.0",
         "symfony/framework-bundle": "~2.1",
         "fabpot/goutte": "1.0.*@dev"
     },
