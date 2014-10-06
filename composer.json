@@ -1,7 +1,7 @@
 {
     "name": "nzo/grabber-bundle",
     "type": "symfony-bundle",
-    "description": "The NzoGrabberBundle is a Symfony2 Bundle used to Crowle and to Grabbe all types of links, URLs and Tags for (img, js, css) from any website.",
+    "description": "The NzoGrabberBundle is a Symfony2 Bundle used to Crowl and to Grabbe all types of links, URLs and Tags for (img, js, css) from any website.",
     "keywords": ["DomCrawler", "Link", "url", "Grabbe", "scrape", "scan", "search", "crawl"],
     "license": "MIT",
     "authors": [
