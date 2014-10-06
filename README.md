@@ -51,45 +51,93 @@ Usage
 
 In the controller use the Grabber service and specify the options needed:
 
+Get all URLs:
+
 ```php
      public function indexAction($url)
     {
-        // get all URLs with no Exception
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url);
-
-        // OR .. get all URLs but with Exception of $notScannedUrlsTab array.
-
-            $notScannedUrlsTab = ['http://www.exemple.com/about']
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
-
-        // OR .. get all URLs but with Exception of $notScannedUrlsTab array and file Extension
-        //    Also you can exclude any URL containing the `` $exclude `` value.
-
-            $exclude = 'someText';
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, $exclude, array('png', 'pdf'));
-
-        // OR .. get all URLs but with only Exception of file Extension
-
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, null, array('png', 'pdf'));
-
-         // OR .. get all Img Files from the specified URL
-
-            $img = $this->get('nzo_grabber.grabber')->grabImg($url);
-
-        // OR .. get all Js Files from the specified URL
-
-            $js = $this->get('nzo_grabber.grabber')->grabJs($url);
-
-        // OR .. get all Css Files from the specified URL
-
-            $css = $this->get('nzo_grabber.grabber')->grabCss($url);
-
-        // OR .. get all Css, Img and Js Files from the specified URL
-
-            $extrat = $this->get('nzo_grabber.grabber')->grabExtrat($url);
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url);
 
         //....
+    }
+```
 
+OR .. get all URLs that does not figure in the ``exclude array``:
+
+```php
+     public function indexAction($url)
+    {
+        $notScannedUrlsTab = ['http://www.exemple.com/about']
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
+
+        //....
+    }
+```
+
+OR .. you can exclude URLs that contains a specified text and also you can select by ``file extension``:
+
+```php
+     public function indexAction($url)
+    {
+        $exclude = 'someText_to_exclude';
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, $exclude, array('png', 'pdf'));
+
+        //....
+    }
+```
+
+OR .. get all URLs selected by ``file extension``:
+
+```php
+     public function indexAction($url)
+    {
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, null, array('png', 'pdf'));
+
+        //....
+    }
+```
+
+OR .. get all ``Img Files`` from the specified URL:
+
+```php
+     public function indexAction($url)
+    {
+        $img = $this->get('nzo_grabber.grabber')->grabImg($url);
+
+        //....
+    }
+```
+
+OR .. get all ``Js Files`` from the specified URL:
+
+```php
+     public function indexAction($url)
+    {
+        $js = $this->get('nzo_grabber.grabber')->grabJs($url);
+
+        //....
+    }
+```
+
+OR .. get all ``Css Files`` from the specified URL:
+
+```php
+     public function indexAction($url)
+    {
+        $css = $this->get('nzo_grabber.grabber')->grabCss($url);
+
+        //....
+    }
+```
+
+OR .. get all ``Css``, ``Img`` and ``Js`` Files from the specified URL:
+
+```php
+     public function indexAction($url)
+    {
+        $extrat = $this->get('nzo_grabber.grabber')->grabExtrat($url);
+
+        //....
     }    
 ```
 
