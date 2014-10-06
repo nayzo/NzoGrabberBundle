@@ -1,14 +1,17 @@
 NzoGrabberBundle
 =====================
 
-The **NzoGrabberBundle** is a Symfony2 Bundle used to Grabbe all types of links, URLs and Tags for (img, js, css) from any website.
+[![Build Status](https://travis-ci.org/NAYZO/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/NAYZO/NzoGrabberBundle)
+
+
+The **NzoGrabberBundle** is a Symfony2 Bundle used to ``Crowle`` and to ``Grabbe`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
 
 Features include:
 
-- Url Grabber for HTTP/HTTPS
-- Url Grabber for HREF/SRC/IMG types
+- Url Grabber for ``HTTP/HTTPS``
+- Url Grabber for ``HREF / SRC / IMG`` types
 - Exclude any type of file by extension
-- Prevent specified URLs from been Grabbed
+- Prevent specified URLs from Grabbing
 
 
 Installation 
@@ -22,6 +25,11 @@ Add the following lines in your `composer.json` file:
 "require": {
     "nzo/grabber-bundle": "dev-master"
 }
+```
+Install the bundle:
+
+```
+$ composer update
 ```
 
 ### Register the bundle in app/AppKernel.php:
@@ -55,12 +63,14 @@ In the controller use the Grabber service and specify the options needed:
             $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
 
         // OR .. get all URLs but with Exception of $notScannedUrlsTab array and file Extension
+//    Also you can exclude any URL containing the `` $exclude `` value.
 
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, array('png', 'pdf'));
+            $exclude = 'someText';
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab, $exclude, array('png', 'pdf'));
 
         // OR .. get all URLs but with only Exception of file Extension
 
-            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, array('png', 'pdf'));
+            $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, null, array('png', 'pdf'));
 
          // OR .. get all Img Files from the specified URL
 
@@ -74,7 +84,7 @@ In the controller use the Grabber service and specify the options needed:
 
             $css = $this->get('nzo_grabber.grabber')->grabCss($url);
 
-        // OR .. get all Css and Img and Js Files from the specified URL
+        // OR .. get all Css, Img and Js Files from the specified URL
 
             $extrat = $this->get('nzo_grabber.grabber')->grabExtrat($url);
 
