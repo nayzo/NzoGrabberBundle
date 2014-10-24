@@ -4,7 +4,7 @@ NzoGrabberBundle
 [![Build Status](https://travis-ci.org/NAYZO/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/NAYZO/NzoGrabberBundle)
 
 
-The **NzoGrabberBundle** is a Symfony2 Bundle used to ``Crowl`` and to ``Grabbe`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
+The **NzoGrabberBundle** is a Symfony2 Bundle used to ``Crowl`` and to ``Grab`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
 
 Features include:
 
