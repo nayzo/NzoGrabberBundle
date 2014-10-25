@@ -73,7 +73,12 @@ class Grabber
 
         foreach ($crawler->filter('a[href]')->links() as $domElement) {
             $lien = $this->cleanUpUrl($domElement->getUri());
-            if ($this->testExistanceScanned($lien) && $this->testExistanceNotScanned($lien) && $this->testDomaine($lien) && $this->testExtension($lien) && $this->notInExculde($lien)) {
+            if ($this->testExistanceScanned($lien)
+                && $this->testExistanceNotScanned($lien)
+                && $this->testDomaine($lien)
+                && $this->testExtension($lien)
+                && $this->notInExculde($lien)
+            ) {
                 $this->ScannedUrlsTab[] = $lien;
             }
         }
