@@ -128,6 +128,7 @@ class Grabber
                 return false;
             }
         }
+
         return true;
     }
 
@@ -140,6 +141,7 @@ class Grabber
         if (empty($this->extensionTab)) {
             return true;
         }
+
         if (substr($lien, -1) === '/' || substr($lien, -1) === '#') {
             $lien = substr($lien, 0, -1);
         }
@@ -149,6 +151,7 @@ class Grabber
                 return false;
             }
         }
+
         return true;
     }
 
@@ -170,6 +173,7 @@ class Grabber
         $this->cleanUpArray();
         $crawler = $this->client->request('GET', $url);
         $this->url = $this->getDomaine($url);
+
         return $this->addHost($crawler->filter('img[src]')->extract(array('src')));
     }
 
@@ -182,6 +186,7 @@ class Grabber
         $this->cleanUpArray();
         $crawler = $this->client->request('GET', $url);
         $this->url = $this->getDomaine($url);
+
         return $this->addHost($crawler->filter('script[src]')->extract(array('src')));
     }
 
@@ -194,6 +199,7 @@ class Grabber
         $this->cleanUpArray();
         $crawler = $this->client->request('GET', $url);
         $this->url = $this->getDomaine($url);
+
         return $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
     }
 
@@ -216,6 +222,7 @@ class Grabber
                     $this->ScannedUrlsTab[] = $this->url . '/' . $val;
             }
         }
+
         return $this->ScannedUrlsTab;
     }
 
@@ -239,6 +246,7 @@ class Grabber
                 }
             }
         }
+
         return $this->ScannedUrlsTab;
     }
 
@@ -255,6 +263,7 @@ class Grabber
         $this->addHostCss($crawler->filter('link[href]')->extract(array('href')));
         $this->addHost($crawler->filter('img[src]')->extract(array('src')));
         $this->addHost($crawler->filter('script[src]')->extract(array('src')));
+
         return $this->ScannedUrlsTab;
     }
 
@@ -280,6 +289,7 @@ class Grabber
         if (empty($this->exclude)) {
             return true;
         }
+
         return strpos($lien, $this->exclude) === false;
     }
-} 
+}
