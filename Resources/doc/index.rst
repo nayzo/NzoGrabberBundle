@@ -23,7 +23,7 @@ Add the following lines in your `composer.json` file:
 
 ``` js
 "require": {
-    "nzo/grabber-bundle": "dev-master"
+    "nzo/grabber-bundle": "~1.0"
 }
 ```
 Install the bundle:
