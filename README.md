@@ -56,7 +56,7 @@ Get all URLs:
 ```php
      public function indexAction($url)
     {
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url);
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url);
 
         //....
     }
@@ -68,7 +68,7 @@ OR .. get all URLs that does not figure in the ``exclude array``:
      public function indexAction($url)
     {
         $notScannedUrlsTab = ['http://www.exemple.com/about']
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, $notScannedUrlsTab);
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, $notScannedUrlsTab);
 
         //....
     }
@@ -80,7 +80,7 @@ OR .. you can exclude URLs that contains a specified ``text`` and also you can s
      public function indexAction($url)
     {
         $exclude = 'someText_to_exclude';
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, $exclude, array('png', 'pdf'));
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, null, $exclude, array('png', 'pdf'));
 
         //....
     }
@@ -91,7 +91,7 @@ OR .. get all URLs selected by ``file extension``:
 ```php
      public function indexAction($url)
     {
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->graburls($url, null, null, array('png', 'pdf'));
+        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, null, null, array('png', 'pdf'));
 
         //....
     }
