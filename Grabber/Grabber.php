@@ -107,6 +107,7 @@ class Grabber
                 return false;
             }
         }
+
         return true;
     }
 
@@ -213,13 +214,15 @@ class Grabber
         foreach ($urlsTab as $val) {
             $sub = substr($val, 0, 7);
             if ('http://' === $sub || 'https:/' === $sub) {
-                if ($this->getDomaine($val) === $this->url)
+                if ($this->getDomaine($val) === $this->url) {
                     $this->ScannedUrlsTab[] = $val;
+                }
             } else {
-                if ($val[0] === '/')
+                if ($val[0] === '/') {
                     $this->ScannedUrlsTab[] = $this->url . $val;
-                else
+                } else {
                     $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+                }
             }
         }
 
@@ -236,13 +239,15 @@ class Grabber
             if (substr($val, -4) === '.css') {
                 $sub = substr($val, 0, 7);
                 if ('http://' === $sub || 'https:/' === $sub) {
-                    if ($this->getDomaine($val) === $this->url)
+                    if ($this->getDomaine($val) === $this->url) {
                         $this->ScannedUrlsTab[] = $val;
+                    }
                 } else {
-                    if ($val[0] === '/')
+                    if ($val[0] === '/') {
                         $this->ScannedUrlsTab[] = $this->url . $val;
-                    else
+                    } else {
                         $this->ScannedUrlsTab[] = $this->url . '/' . $val;
+                    }
                 }
             }
         }
@@ -274,6 +279,7 @@ class Grabber
     public function getDomaine($url)
     {
         $url = str_replace('://www.', '://', $url);
+
         return parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
     }
 
