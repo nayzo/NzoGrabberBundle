@@ -1,15 +1,15 @@
 NzoGrabberBundle
-=====================
+================
 
 [![Build Status](https://travis-ci.org/NAYZO/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/NAYZO/NzoGrabberBundle)
 
 
-The **NzoGrabberBundle** is a Symfony2 Bundle used to ``Crowl`` and to ``Grab`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
+The **NzoGrabberBundle** is a Symfony2 Bundle used to ``Crawl`` and to ``Grab`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
 
 Features include:
 
-- Url Grabber for ``HTTP/HTTPS``
-- Url Grabber for ``HREF / SRC / IMG`` types
+- Url Grabber/Crawler for ``HTTP/HTTPS``
+- Url Grabber/Crawler for ``HREF / SRC / IMG`` types
 - Exclude any type of file by extension
 - Prevent specified URLs from Grabbing
 
@@ -138,7 +138,7 @@ OR .. get all ``Css``, ``Img`` and ``Js`` Files from the specified URL:
         $extrat = $this->get('nzo_grabber.grabber')->grabExtrat($url);
 
         //....
-    }    
+    }
 ```
 
 License
