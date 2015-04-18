@@ -1,6 +1,0 @@
-parameters:
-    nzo_grabber.grabber.class: Nzo\GrabberBundle\Grabber\Grabber
-
-services:
-    nzo_grabber.grabber:
-        class: %nzo_grabber.grabber.class%
