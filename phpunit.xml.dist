@@ -10,7 +10,7 @@
          stopOnFailure="false"
          syntaxCheck="false"
          bootstrap="vendor/autoload.php"
-        >
+>
     <testsuites>
         <testsuite name="Nzo Grabber Bundle Test Suite">
             <directory>./Tests/</directory>
@@ -22,6 +22,8 @@
             <directory>./</directory>
             <exclude>
                 <directory>./Tests</directory>
+                <directory>./DependencyInjection</directory>
+                <directory>./Resources</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>

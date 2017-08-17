@@ -20,6 +20,5 @@
     <services>
         <service id="nzo_grabber.grabber" class="%nzo_grabber.grabber.class%">
         </service>
-
     </services>
 </container>

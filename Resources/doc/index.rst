@@ -2,9 +2,10 @@ NzoGrabberBundle
 ================
 
 [![Build Status](https://travis-ci.org/NAYZO/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/NAYZO/NzoGrabberBundle)
+[![Latest Stable Version](https://poser.pugx.org/nzo/grabber-bundle/v/stable)](https://packagist.org/packages/nzo/grabber-bundle)
 
 
-The **NzoGrabberBundle** is a Symfony2 Bundle used to ``Crawl`` and to ``Grab`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
+The **NzoGrabberBundle** is a Symfony Bundle used to ``Crawl`` and to ``Grab`` all types of ``links``, ``URLs`` and ``Tags`` for (img, js, css) from any website.
 
 Features include:
 
@@ -19,18 +20,13 @@ Installation
 
 ### Through Composer:
 
-Add the following lines in your `composer.json` file:
-
-``` js
-"require": {
-    "nzo/grabber-bundle": "~1.0"
-}
-```
 Install the bundle:
 
 ```
-$ composer update
+$ composer require nzo/grabber-bundle
 ```
+
+
 
 ### Register the bundle in app/AppKernel.php:
 
@@ -56,7 +52,20 @@ Get all URLs:
 ```php
      public function indexAction($url)
     {
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url);
+        $tableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url);
+
+        //....
+    }
+```
+
+OR .. get all URLs not recursively:
+
+Get all URLs no recursive:
+
+```php
+     public function indexAction($url)
+    {
+        $tableOfUrls = $this->get('nzo_grabber.grabber')->grabUrlsNoRecursive($url);
 
         //....
     }
@@ -68,7 +77,7 @@ OR .. get all URLs that does not figure in the ``exclude array``:
      public function indexAction($url)
     {
         $notScannedUrlsTab = ['http://www.exemple.com/about']
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, $notScannedUrlsTab);
+        $tableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, $notScannedUrlsTab);
 
         //....
     }
@@ -80,7 +89,7 @@ OR .. you can exclude URLs that contains a specified ``text`` and also you can s
      public function indexAction($url)
     {
         $exclude = 'someText_to_exclude';
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, null, $exclude, array('png', 'pdf'));
+        $tableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, null, $exclude, array('png', 'pdf'));
 
         //....
     }
@@ -91,7 +100,7 @@ OR .. get all URLs selected by ``file extension``:
 ```php
      public function indexAction($url)
     {
-        $TableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, null, null, array('png', 'pdf'));
+        $tableOfUrls = $this->get('nzo_grabber.grabber')->grabUrls($url, null, null, array('png', 'pdf'));
 
         //....
     }
