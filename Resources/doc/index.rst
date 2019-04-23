@@ -1,7 +1,7 @@
 NzoGrabberBundle
 ================
 
-[![Build Status](https://travis-ci.org/NAYZO/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/NAYZO/NzoGrabberBundle)
+[![Build Status](https://travis-ci.org/nayzo/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/nayzo/NzoGrabberBundle)
 [![Latest Stable Version](https://poser.pugx.org/nzo/grabber-bundle/v/stable)](https://packagist.org/packages/nzo/grabber-bundle)
 
 
@@ -9,10 +9,12 @@ The **NzoGrabberBundle** is a Symfony Bundle used to ``Crawl`` and to ``Grab`` a
 
 Features include:
 
+- Compatible Symfony version 3 & 4
 - Url Grabber/Crawler for ``HTTP/HTTPS``
 - Url Grabber/Crawler for ``HREF / SRC / IMG`` types
 - Exclude any type of file by extension
 - Prevent specified URLs from Grabbing
+- Compatible php version 5 & 7
 
 
 Installation 
@@ -155,4 +157,4 @@ License
 
 This bundle is under the MIT license. See the complete license in the bundle:
 
-See [Resources/doc/LICENSE](https://github.com/NAYZO/NzoGrabberBundle/blob/master/Resources/doc/LICENSE)
+See [Resources/doc/LICENSE](https://github.com/nayzo/NzoGrabberBundle/blob/master/Resources/doc/LICENSE)

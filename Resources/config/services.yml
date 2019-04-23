@@ -1,0 +1,6 @@
+services:
+
+    Nzo\GrabberBundle\Grabber\Grabber: '@nzo_grabber.grabber'
+
+    nzo_grabber.grabber:
+        class: Nzo\GrabberBundle\Grabber\Grabber
