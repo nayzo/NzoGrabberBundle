@@ -134,9 +134,9 @@ class Grabber
                 $this->scannedUrlsTab[] = $val;
             } else {
                 if ($val[0] === '/') {
-                    $this->scannedUrlsTab[] = $this->url . $val;
+                    $this->scannedUrlsTab[] = $this->url.$val;
                 } else {
-                    $this->scannedUrlsTab[] = $this->url . '/' . $val;
+                    $this->scannedUrlsTab[] = $this->url.'/'.$val;
                 }
             }
         }
@@ -157,9 +157,9 @@ class Grabber
                     $this->scannedUrlsTab[] = $val;
                 } else {
                     if ($val[0] === '/') {
-                        $this->scannedUrlsTab[] = $this->url . $val;
+                        $this->scannedUrlsTab[] = $this->url.$val;
                     } else {
-                        $this->scannedUrlsTab[] = $this->url . '/' . $val;
+                        $this->scannedUrlsTab[] = $this->url.'/'.$val;
                     }
                 }
             }
@@ -193,7 +193,7 @@ class Grabber
     {
         $url = str_replace('://www.', '://', $url);
 
-        return parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
+        return parse_url($url, PHP_URL_SCHEME).'://'.parse_url($url, PHP_URL_HOST);
     }
 
     public function cleanArray()
@@ -265,7 +265,7 @@ class Grabber
 
         foreach ($this->scannedUrlsTab as $val) {
             $val = str_replace('://www.', '://', $val);
-            if ($link === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $link . '/' === $val)) {
+            if ($link === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $link.'/' === $val)) {
                 return false;
             }
         }
@@ -287,7 +287,7 @@ class Grabber
         $verifChar = substr($link, -1) === '/';
         foreach ($this->notScannedUrlsTab as $val) {
             $val = str_replace('://www.', '://', $val);
-            if ($link === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $link . '/' === $val)) {
+            if ($link === $val || ($verifChar && $stringUrl === $val) || (!$verifChar && $link.'/' === $val)) {
                 return false;
             }
         }
@@ -310,7 +310,7 @@ class Grabber
         }
 
         foreach ($this->extensionTab as $extension) {
-            if (strtolower(substr($link, -(strlen($extension) + 1))) === '.' . strtolower($extension)) {
+            if (strtolower(substr($link, -(strlen($extension) + 1))) === '.'.strtolower($extension)) {
                 return false;
             }
         }
