@@ -1,7 +1,7 @@
 NzoGrabberBundle
 ================
 
-[![Build Status](https://travis-ci.org/NAYZO/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/NAYZO/NzoGrabberBundle)
+[![Build Status](https://travis-ci.org/nayzo/NzoGrabberBundle.svg?branch=master)](https://travis-ci.org/nayzo/NzoGrabberBundle)
 [![Latest Stable Version](https://poser.pugx.org/nzo/grabber-bundle/v/stable)](https://packagist.org/packages/nzo/grabber-bundle)
 
 
@@ -155,4 +155,4 @@ License
 
 This bundle is under the MIT license. See the complete license in the bundle:
 
-See [Resources/doc/LICENSE](https://github.com/NAYZO/NzoGrabberBundle/blob/master/Resources/doc/LICENSE)
+See [Resources/doc/LICENSE](https://github.com/nayzo/NzoGrabberBundle/blob/master/Resources/doc/LICENSE)
